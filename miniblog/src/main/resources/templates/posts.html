@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Posts</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
+            width: 700px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #880e4f;
+        }
+        .post {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .post h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #ad1457;
+        }
+        .post p {
+            color: #333;
+            font-size: 14px;
+        }
+        a {
+            color: #6a1b9a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #ad1457;
+        }
+        .new-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: #ad1457;
+            color: #fff;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+        .new-btn:hover {
+            background: #880e4f;
+        }
+        /* Delete Button */
+        .delete-btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-left: 10px;
+            background-color: #f48fb1; /* soft pink-red */
+            color: white;
+            border-radius: 8px;
+            font-size: 12px;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+        .delete-btn:hover {
+            background-color: #c2185b; /* darker pink-red */
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>All Blog Posts</h1>
+    <div th:each="post : ${posts}" class="post">
+        <h2 th:text="${post.title}"></h2>
+        <p>By <span th:text="${post.author}"></span></p>
+        <a th:href="@{/posts/{id}(id=${post.id})}">Read More →</a>
+        <!-- 🆕 Delete button -->
+        <a th:href="@{/posts/delete/{id}(id=${post.id})}"
+           class="delete-btn"
+           onclick="return confirm('Are you sure you want to delete this post?');">
+            Delete
+        </a>
+    </div>
+    <a class="new-btn" th:href="@{/posts/new}">+ New Post</a>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>MiniBlog - Home</title>
+  <style>
+    body {
+        font-family: 'Georgia', serif;
+        background-color: #fffafc; /* soft blush background */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+    }
+    .home-container {
+        background-color: #ffffff;
+        border: 2px solid #f4c2d7; /* light rose border */
+        border-radius: 15px;
+        padding: 50px;
+        width: 600px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+        color: #a64682; /* deep rose */
+        margin-bottom: 20px;
+        font-size: 2.5rem;
+    }
+    p {
+        color: #444;
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+    a.button {
+        display: inline-block;
+        padding: 12px 25px;
+        background-color: #f4c2d7;
+        color: #5a2a4d;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 30px;
+        transition: 0.3s;
+    }
+    a.button:hover {
+        background-color: #a64682;
+        color: #fff;
+    }
+  </style>
+</head>
+<body>
+<div class="home-container">
+  <h1>Welcome to MiniBlog ✨</h1>
+  <p>Share your thoughts, stories, and creativity in style.</p>
+  <a href="/posts" class="button">View All Posts</a>
+  <br><br>
+  <a href="/posts/new" class="button">➕ Create a New Post</a>
+</div>
+</body>
+</html>
