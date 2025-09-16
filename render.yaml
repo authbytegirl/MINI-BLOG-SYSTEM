@@ -1,7 +1,7 @@
 services:
   - type: web
     name: miniblog
-    runtime: java17-openjdk
+    runtime: java20
     plan: free
     buildCommand: ./mvnw clean package -DskipTests
     startCommand: java -jar miniblog/target/*.jar
