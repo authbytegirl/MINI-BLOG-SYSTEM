@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: miniblog
-    runtime: java20
-    plan: free
-    buildCommand: ./mvnw clean package -DskipTests
-    startCommand: java -jar miniblog/target/miniblog-0.0.1-SNAPSHOT.jar
-    rootDir: miniblog

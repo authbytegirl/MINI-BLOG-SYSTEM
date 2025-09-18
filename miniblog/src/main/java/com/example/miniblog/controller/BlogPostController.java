@@ -46,5 +46,20 @@ public class BlogPostController {
         repository.deleteById(id);
         return "redirect:/posts"; // redirect back to all posts
     }
+
+    @PostMapping("/posts")
+    public String createPost(@ModelAttribute Post post, Principal principal) {
+        User user = userRepository.findByUsername(principal.getName()).orElseThrow();
+        post.setUser(user);
+        postRepository.save(post);
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/posts")
+    public String listPosts(Model model, Principal principal) {
+        User user = userRepository.findByUsername(principal.getName()).orElseThrow();
+        model.addAttribute("posts", postRepository.findByUser(user));
+        return "posts";
+    }
 }
 
