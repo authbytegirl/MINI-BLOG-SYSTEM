@@ -6,6 +6,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,13 +17,13 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    // Optional: email, roles, etc.
     private String email;
 
+    // One user can have many posts
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Post> posts;
+    private List<BlogPost> posts;
 
-    // getters and setters
+    // Getters & setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -35,6 +36,6 @@ public class User {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public List<Post> getPosts() { return posts; }
-    public void setPosts(List<Post> posts) { this.posts = posts; }
+    public List<BlogPost> getPosts() { return posts; }
+    public void setPosts(List<BlogPost> posts) { this.posts = posts; }
 }

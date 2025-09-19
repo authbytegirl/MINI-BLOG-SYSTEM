@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AuthController {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -18,9 +19,9 @@ public class AuthController {
     }
 
     @GetMapping("/register")
-    public String showRegisterForm(Model model) {
+    public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
-        return "register"; // create a register.html in templates
+        return "register";
     }
 
     @PostMapping("/register")
@@ -29,5 +30,11 @@ public class AuthController {
         userRepository.save(user);
         return "redirect:/login";
     }
+
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
 }
+
 
