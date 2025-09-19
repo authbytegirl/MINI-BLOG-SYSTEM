@@ -28,10 +28,14 @@ public class AuthController {
 
     // Handle registration form submission
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute User user) {
+    public String registerUser(@ModelAttribute User user, Model model) {
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+            model.addAttribute("error", "Username already taken!");
+            return "register";
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        return "redirect:/auth/login";
+        return "redirect:/auth/login?registered=true"; // success flag
     }
 
     // Login page
