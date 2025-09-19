@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/auth") // Namespace for authentication routes
 public class AuthController {
 
     private final UserRepository userRepository;
@@ -18,23 +19,24 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // Registration page
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
         return "register";
     }
 
+    // Handle registration form submission
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        return "redirect:/login";
+        return "redirect:/auth/login";
     }
 
+    // Login page
     @GetMapping("/login")
     public String loginPage() {
         return "login";
     }
 }
-
-

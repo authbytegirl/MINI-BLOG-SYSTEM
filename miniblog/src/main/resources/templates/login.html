@@ -11,7 +11,7 @@
     <h1>Login</h1>
 
     <!-- Login form -->
-    <form th:action="@{/login}" method="post">
+    <form th:action="@{/auth/login}" method="post">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" placeholder="Enter username" required>
 
@@ -32,7 +32,7 @@
     </div>
 
     <p style="text-align:center; margin-top:15px;">
-        Don’t have an account? <a th:href="@{/register}">Register here</a>
+        Don’t have an account? <a th:href="@{/auth/register}">Register here</a>
     </p>
 </div>
 
