@@ -5,6 +5,7 @@ import com.example.miniblog.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,14 +19,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Fetching user from DB
-        User appUser = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        // Using Spring Security's User implementation
-        return org.springframework.security.core.userdetails.User.withUsername(appUser.getUsername())
-                .password(appUser.getPassword())
-                .roles("USER") // static for now
-                .build();
+        UserBuilder builder = org.springframework.security.core.userdetails.User.withUsername(user.getUsername());
+        builder.password(user.getPassword()); // already encoded!
+        builder.roles("USER"); // fixed role
+        return builder.build();
     }
 }
